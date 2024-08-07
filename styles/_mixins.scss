@@ -1,0 +1,22 @@
+// Responsive breakpoint manager
+@mixin respond-to($breakpoint, $landscape: false, $portrait: false) {
+  $query-width: map-get($breakpoints, $breakpoint);
+
+  @if $query-width {
+    $query: unquote("(min-width: #{$query-width})");
+
+    @if $landscape {
+      $query: unquote("#{$query} and (orientation: landscape)");
+    }
+    @if $portrait {
+      $query: unquote("#{$query} and (orientation: portrait)");
+    }
+
+    @media #{$query} {
+      @content;
+    }
+  } @else {
+    @error 'No value found for `#{$breakpoint}`. '
+        + 'Please make sure it is defined in `$breakpoints` map.';
+  }
+}

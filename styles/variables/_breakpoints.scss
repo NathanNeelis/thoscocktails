@@ -1,0 +1,20 @@
+@import "./sizes";
+
+$breakpoints: (
+  "x-small": 20rem,
+  // 320px small devices
+  "small": 30rem,
+  // 480px main phone devices
+  "medium": 48rem,
+  // 768px main tablet portrait
+  "large": 66rem,
+  // 1056px main tablet landscape
+  "mid-large": 68rem,
+  // this is a value for connect with us section
+  "x-large": 80rem,
+  // 1280px main laptop screen
+  "xx-large": 105rem,
+  // 1680px large laptop screen
+  "xxx-large": 125rem,
+  // 2000px second screen
+);

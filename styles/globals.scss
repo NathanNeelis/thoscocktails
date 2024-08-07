@@ -1,0 +1,107 @@
+// helpers
+@import "variables";
+
+// foundation
+@import "foundation/normalize.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: $font-family;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  background-color: $white;
+  *:focus {
+    outline: 0;
+  }
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+#app {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  overflow: hidden;
+  overflow-x: hidden;
+}
+
+h1,
+h2 {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  @include respond-to("medium") {
+    font-size: 4rem;
+    line-height: 4rem;
+  }
+}
+
+h3 {
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+  @include respond-to("medium") {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: $font-family-headers;
+}
+
+p {
+  margin: 0;
+  font-family: $font-family;
+  font-weight: $font-weight-normal;
+  font-size: 1rem;
+  line-height: 1.4rem;
+
+  // &::selection {
+  //   background: $orange;
+  //   color: $white;
+  // }
+}
+
+a,
+a:visited {
+  text-decoration: none;
+
+  // &::selection {
+  //   background: green; // change this
+  // }
+}
+
+strong {
+  // font-family: $font-bold;
+}
+
+ul,
+li,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style-position: inside;
+
+  // &::selection {
+  //   background: green;
+  //   color: $white;
+  // }
+}
+
+ul {
+  width: 100%;
+}
