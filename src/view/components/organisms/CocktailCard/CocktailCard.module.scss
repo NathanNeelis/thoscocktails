@@ -1,8 +1,57 @@
 @import "../../../../../styles/variables";
 
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 7rem;
+}
+
 .cocktailCardWrapper {
   width: 100vw;
-  height: 20rem;
-  background-color: $primary;
   color: white;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  position: relative;
+}
+
+.cocktailImageWrapper {
+  height: 17rem;
+
+  img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cocktailImage {
+    width: 100vw;
+  }
+}
+
+.cocktailTitle {
+  padding: 0rem 1rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  background-color: $primary;
+}
+
+.tags {
+  position: absolute;
+  width: 100vw;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem 0.75rem 0 0;
+
+  .tag {
+    padding: 0.1rem 0.6rem;
+    margin: 0.3rem;
+    background-color: $highlight;
+
+    border-radius: 0.7rem;
+
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
 }
