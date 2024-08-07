@@ -1,0 +1,58 @@
+@import "../../../../../styles/variables";
+
+.headerWrapper {
+  width: 100vw;
+  background-color: $white;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.logo {
+  padding: 1rem 0;
+}
+
+.searchBar {
+  //   height: 2.3rem;
+  //   display: flex;
+  //   align-items: center;
+  fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+  label {
+    display: none;
+  }
+}
+
+.input {
+  height: 2.3rem;
+  padding: 0.45rem 0.6rem;
+  border: 2px solid $highlight;
+  background-color: $white;
+  border-radius: 0.6rem;
+  filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.45));
+
+  &:focus {
+    filter: drop-shadow(1px 1px 3px rgba(232, 69, 69, 0.45));
+  }
+}
+
+.filters {
+  background-color: $highlight;
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 0.6rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filterIcon {
+  display: flex;
+  width: 1.8rem;
+  height: 1.8rem;
+}
