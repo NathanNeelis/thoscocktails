@@ -1,7 +1,7 @@
 import React from "react";
+import { Tags } from "@src/view/components";
 
 import $ from "./CocktailCard.module.scss";
-import ImageWrapper from "../../atoms/ImageWrapper/ImageWrapper";
 
 type Props = {};
 
@@ -21,10 +21,7 @@ const CocktailCard: React.FC<Props> = ({}) => {
         </div>
 
         {/* tags */}
-        <div className={$.tags}>
-          <div className={$.tag}>citrus</div>
-          <div className={$.tag}>sour</div>
-        </div>
+        <Tags />
       </div>
 
       <div className={$.cocktailCardWrapper}>
@@ -39,10 +36,7 @@ const CocktailCard: React.FC<Props> = ({}) => {
           <h2>Bramble</h2>
         </div>
 
-        <div className={$.tags}>
-          <div className={$.tag}>citrus</div>
-          <div className={$.tag}>sour</div>
-        </div>
+        <Tags />
       </div>
 
       <div className={$.cocktailCardWrapper}>
@@ -57,10 +51,7 @@ const CocktailCard: React.FC<Props> = ({}) => {
           <h2>Long Island</h2>
         </div>
 
-        <div className={$.tags}>
-          <div className={$.tag}>citrus</div>
-          <div className={$.tag}>sour</div>
-        </div>
+        <Tags />
       </div>
     </div>
   );

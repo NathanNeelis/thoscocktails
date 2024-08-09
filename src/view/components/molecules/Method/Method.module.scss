@@ -1,0 +1,22 @@
+@import "../../../../../styles/variables";
+
+.methodWrapper {
+  background-color: $highlight;
+  padding: 2rem 1.5rem 3rem 1.5rem;
+  color: $white;
+
+  h3 {
+    margin: 0;
+    padding-bottom: 1.5rem;
+  }
+
+  .methodContent {
+    li {
+      line-height: 1.8rem;
+      list-style-position: outside;
+      padding-top: 0.4rem;
+      padding-left: 0.5rem;
+      margin-left: 1rem;
+    }
+  }
+}

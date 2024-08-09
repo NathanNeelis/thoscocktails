@@ -36,22 +36,3 @@
   align-items: center;
   background-color: $primary;
 }
-
-.tags {
-  position: absolute;
-  width: 100vw;
-  display: flex;
-  justify-content: flex-end;
-  padding: 0.5rem 0.75rem 0 0;
-
-  .tag {
-    padding: 0.1rem 0.6rem;
-    margin: 0.3rem;
-    background-color: $highlight;
-
-    border-radius: 0.7rem;
-
-    font-size: 0.8rem;
-    font-weight: bold;
-  }
-}

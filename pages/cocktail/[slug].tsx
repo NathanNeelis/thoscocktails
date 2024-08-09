@@ -1,9 +1,8 @@
 import Head from "next/head";
 import { createClient } from "contentful";
+import { Details, DetailpageHeader } from "@src/view/components";
 
 import $ from "./index.module.scss";
-import Hero from "@src/view/components/atoms/Hero/Hero";
-import DetailpageHeader from "@src/view/components/organisms/DetailpageHeader/DetailpageHeader";
 
 interface Props {}
 
@@ -23,13 +22,7 @@ const CocktailPage: React.FC<Props> = ({}) => {
       <DetailpageHeader />
 
       <main className={$.main}>
-        {/* cocktail description  */}
-
-        {/* ingredients  */}
-
-        {/* method  */}
-
-        {/* creator  */}
+        <Details />
       </main>
 
       <footer></footer>

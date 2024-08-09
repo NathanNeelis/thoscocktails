@@ -1,0 +1,26 @@
+@import "../../../../../styles/variables";
+
+.descriptionWrapper {
+  background-color: $primary;
+  color: $white;
+  position: relative;
+
+  .descriptionHeader {
+    width: 100%;
+  }
+
+  .tagsWrapper {
+    width: 100%;
+    position: absolute;
+    top: 1rem;
+  }
+
+  h2 {
+    margin: 0;
+    padding: 2rem 1rem 1rem 1.5rem;
+  }
+
+  .descriptionContent {
+    padding: 1rem 1.5rem 3rem 1.5rem;
+  }
+}

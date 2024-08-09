@@ -1,0 +1,12 @@
+@import "../../../../../styles/variables";
+
+.creatorWrapper {
+  background-color: $tertiary;
+  padding: 2rem 1.5rem 3rem 1.5rem;
+  color: $white;
+
+  h3 {
+    margin: 0;
+    padding-bottom: 1.5rem;
+  }
+}

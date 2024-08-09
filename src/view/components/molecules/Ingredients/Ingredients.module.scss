@@ -1,0 +1,17 @@
+@import "../../../../../styles/variables";
+
+.ingredientsWrapper {
+  background-color: $secondary;
+  padding: 2rem 1.5rem 3rem 1.5rem;
+  color: $white;
+
+  h3 {
+    margin: 0;
+    padding-bottom: 1.5rem;
+  }
+
+  ul {
+    list-style: none;
+    line-height: 1.8rem;
+  }
+}
