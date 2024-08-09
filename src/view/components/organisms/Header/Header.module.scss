@@ -2,11 +2,12 @@
 
 .headerWrapper {
   width: 100vw;
-  background-color: $white;
-  color: white;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  gap: 1rem;
+
+  background-color: $white;
+  color: white;
 
   position: fixed;
   top: 0;
@@ -14,13 +15,12 @@
 }
 
 .logo {
-  padding: 1rem 0;
+  padding: 1rem 0rem 1rem 1rem;
 }
 
 .searchBar {
-  //   height: 2.3rem;
-  //   display: flex;
-  //   align-items: center;
+  width: 100%;
+
   fieldset {
     border: none;
     margin: 0;
@@ -33,6 +33,7 @@
 
 .input {
   height: 2.3rem;
+  width: 100%;
   padding: 0.45rem 0.6rem;
   border: 2px solid $highlight;
   background-color: $white;
@@ -46,9 +47,10 @@
 
 .filters {
   background-color: $highlight;
-  width: 2.3rem;
+  min-width: 2.3rem;
   height: 2.3rem;
   border-radius: 0.6rem;
+  margin-right: 1rem;
 
   display: flex;
   align-items: center;
