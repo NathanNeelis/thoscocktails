@@ -1,58 +1,37 @@
 import React from "react";
 import { Tags } from "@src/view/components";
+import { CocktailCollection } from "@src/types";
 
 import $ from "./CocktailCard.module.scss";
 
-type Props = {};
+type Props = {
+  cocktailCollection: Array<CocktailCollection>;
+};
 
-const CocktailCard: React.FC<Props> = ({}) => {
+const CocktailCard: React.FC<Props> = ({ cocktailCollection }) => {
   return (
     <div className={$.cards}>
-      <div className={$.cocktailCardWrapper}>
-        <div className={$.cocktailImageWrapper}>
-          <img
-            src="/images/eldiablo.jpeg"
-            alt="El Diablo cocktail visual"
-            className={$.cocktailImage}
-          />
-        </div>
-        <div className={$.cocktailTitle}>
-          <h2>El Diablo</h2>
-        </div>
+      {cocktailCollection &&
+        cocktailCollection.map((cocktail) => {
+          return (
+            <div className={$.cocktailCardWrapper} key={cocktail.fields.name}>
+              <div className={$.cocktailImageWrapper}>
+                <img
+                  src={cocktail.fields.image.fields.file.url}
+                  alt={cocktail.fields.image.fields.description}
+                  className={$.cocktailImage}
+                />
+              </div>
 
-        {/* tags */}
-        <Tags />
-      </div>
+              <div className={$.cocktailTitle}>
+                <h2>{cocktail.fields.name}</h2>
+              </div>
 
-      <div className={$.cocktailCardWrapper}>
-        <div className={$.cocktailImageWrapper}>
-          <img
-            src="/images/bramble.jpeg"
-            alt="El Diablo cocktail visual"
-            className={$.cocktailImage}
-          />
-        </div>
-        <div className={$.cocktailTitle}>
-          <h2>Bramble</h2>
-        </div>
-
-        <Tags />
-      </div>
-
-      <div className={$.cocktailCardWrapper}>
-        <div className={$.cocktailImageWrapper}>
-          <img
-            src="/images/long-island.jpg"
-            alt="long island cocktail visual"
-            className={$.cocktailImage}
-          />
-        </div>
-        <div className={$.cocktailTitle}>
-          <h2>Long Island</h2>
-        </div>
-
-        <Tags />
-      </div>
+              {/* tags */}
+              <Tags tagCollection={cocktail.fields.tags} />
+            </div>
+          );
+        })}
     </div>
   );
 };

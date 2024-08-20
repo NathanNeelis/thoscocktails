@@ -2,11 +2,21 @@ import React from "react";
 
 import $ from "./Tags.module.scss";
 
-const Tags: React.FC = () => {
+type Props = {
+  tagCollection: Array<string>;
+};
+
+const Tags: React.FC<Props> = ({ tagCollection }) => {
   return (
     <div className={$.tags}>
-      <div className={$.tag}>citrus</div>
-      <div className={$.tag}>sour</div>
+      {tagCollection &&
+        tagCollection.map((tag) => {
+          return (
+            <div className={$.tag} key={tag}>
+              {tag}
+            </div>
+          );
+        })}
     </div>
   );
 };

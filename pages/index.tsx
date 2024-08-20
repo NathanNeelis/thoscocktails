@@ -1,12 +1,15 @@
 import Head from "next/head";
 import { createClient } from "contentful";
 import { Header, CocktailCard } from "@src/view/components";
+import { CocktailCollection } from "@src/types";
 
 import $ from "./index.module.scss";
 
-interface Props {}
+interface Props {
+  cocktailCollection: Array<CocktailCollection>;
+}
 
-const Home: React.FC<Props> = ({}) => {
+const Home: React.FC<Props> = ({ cocktailCollection }) => {
   return (
     <div className={$.container}>
       <Head>
@@ -21,7 +24,7 @@ const Home: React.FC<Props> = ({}) => {
       <Header />
 
       <main>
-        <CocktailCard />
+        <CocktailCard cocktailCollection={cocktailCollection} />
       </main>
 
       <footer></footer>
@@ -29,19 +32,19 @@ const Home: React.FC<Props> = ({}) => {
   );
 };
 
-// export async function getStaticProps() {
-//   const client = createClient({
-//     space: process.env.CONTENTFUL_SPACE_ID as string,
-//     accessToken: process.env.CONTENTFUL_ACCES_TOKEN as string,
-//   });
+export async function getStaticProps() {
+  const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID as string,
+    accessToken: process.env.CONTENTFUL_ACCES_TOKEN as string,
+  });
 
-//   const header = await client.getEntries({ content_type: "header" });
-
-//   return {
-//     props: {
-//       header: header.items,
-//     },
-//   };
-// }
+  const cocktails = await client.getEntries({ content_type: "cocktailRecipe" });
+  // console.log("return header", cocktails.items[0].fields);
+  return {
+    props: {
+      cocktailCollection: cocktails.items,
+    },
+  };
+}
 
 export default Home;
