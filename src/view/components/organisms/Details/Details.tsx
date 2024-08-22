@@ -5,16 +5,19 @@ import {
   Method,
   Creator,
 } from "@src/view/components";
+import { CocktailCollection } from "@src/types";
 
 import $ from "./Details.module.scss";
 
-type Props = {};
+interface Props {
+  cocktail: CocktailCollection;
+}
 
-const Details: React.FC<Props> = ({}) => {
+const Details: React.FC<Props> = ({ cocktail }) => {
   return (
     <div className={$.details}>
       {/* cocktail description  */}
-      <Description />
+      <Description description={cocktail.fields.description} />
 
       {/* ingredients  */}
       <Ingredients />

@@ -13,8 +13,14 @@ const CocktailCard: React.FC<Props> = ({ cocktailCollection }) => {
     <div className={$.cards}>
       {cocktailCollection &&
         cocktailCollection.map((cocktail) => {
+          const targetURL = `/cocktail/${cocktail.fields.slug}`;
+
           return (
-            <div className={$.cocktailCardWrapper} key={cocktail.fields.name}>
+            <a
+              href={targetURL}
+              className={$.cocktailCardWrapper}
+              key={cocktail.fields.name}
+            >
               <div className={$.cocktailImageWrapper}>
                 <img
                   src={cocktail.fields.image.fields.file.url}
@@ -29,7 +35,7 @@ const CocktailCard: React.FC<Props> = ({ cocktailCollection }) => {
 
               {/* tags */}
               <Tags tagCollection={cocktail.fields.tags} />
-            </div>
+            </a>
           );
         })}
     </div>

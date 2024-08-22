@@ -7,9 +7,11 @@ export interface CocktailCollection {
 
 type Cocktail = {
   name: string;
+  slug: string;
   image: ImageDetails;
   ingredients: Array<string>;
   tags: Array<string>;
+  description: string;
   method: string;
   bartender: Bartender;
 };

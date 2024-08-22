@@ -1,15 +1,37 @@
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import { createClient } from "contentful";
-import { Header, CocktailCard } from "@src/view/components";
+import { Header, Logo, CocktailCard } from "@src/view/components";
 import { CocktailCollection } from "@src/types";
 
 import $ from "./index.module.scss";
+
+/* 
+  resource for dynamic search
+  https://dev.to/alais29dev/building-a-real-time-search-filter-in-react-a-step-by-step-guide-3lmm
+  */
 
 interface Props {
   cocktailCollection: Array<CocktailCollection>;
 }
 
 const Home: React.FC<Props> = ({ cocktailCollection }) => {
+  // initiate states
+  const [searchCocktailCollection, setSearchCocktailCollection] =
+    useState(cocktailCollection);
+
+  // TODO optional. Add a loading state if searching becomes slow.
+
+  // Searchbar input change handler.
+  // Takes a searchterm string and updates the cocktail collection
+  const handleSearchInputChange = (searchTerm: string): void => {
+    const filteredItems = cocktailCollection.filter((cocktail) =>
+      cocktail.fields.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    setSearchCocktailCollection(filteredItems);
+  };
+
   return (
     <div className={$.container}>
       <Head>
@@ -21,10 +43,15 @@ const Home: React.FC<Props> = ({ cocktailCollection }) => {
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
 
-      <Header />
+      <Header onChangeCallback={handleSearchInputChange} />
 
       <main>
-        <CocktailCard cocktailCollection={cocktailCollection} />
+        {searchCocktailCollection.length === 0 ? (
+          // TODO: update the empty state
+          <p>No cocktails found</p> // should be component
+        ) : (
+          <CocktailCard cocktailCollection={searchCocktailCollection} />
+        )}
       </main>
 
       <footer></footer>
@@ -39,7 +66,8 @@ export async function getStaticProps() {
   });
 
   const cocktails = await client.getEntries({ content_type: "cocktailRecipe" });
-  // console.log("return header", cocktails.items[0].fields);
+  // console.log("return header", cocktails.items[0].fields.slug);
+
   return {
     props: {
       cocktailCollection: cocktails.items,

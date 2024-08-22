@@ -1,12 +1,20 @@
 import Head from "next/head";
+import { ParsedUrlQuery } from "querystring";
 import { createClient } from "contentful";
 import { Details, DetailpageHeader } from "@src/view/components";
+import { CocktailCollection } from "@src/types";
 
 import $ from "./index.module.scss";
 
-interface Props {}
+interface Props {
+  cocktail: CocktailCollection;
+}
 
-const CocktailPage: React.FC<Props> = ({}) => {
+interface Params extends ParsedUrlQuery {
+  slug: string;
+}
+
+const CocktailPage: React.FC<Props> = ({ cocktail }) => {
   return (
     <div>
       <Head>
@@ -22,7 +30,7 @@ const CocktailPage: React.FC<Props> = ({}) => {
       <DetailpageHeader />
 
       <main className={$.main}>
-        <Details />
+        <Details cocktail={cocktail} />
       </main>
 
       <footer></footer>
@@ -30,19 +38,46 @@ const CocktailPage: React.FC<Props> = ({}) => {
   );
 };
 
-// export async function getStaticProps() {
-//   const client = createClient({
-//     space: process.env.CONTENTFUL_SPACE_ID as string,
-//     accessToken: process.env.CONTENTFUL_ACCES_TOKEN as string,
-//   });
+export const getStaticPaths = async () => {
+  const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID as string,
+    accessToken: process.env.CONTENTFUL_ACCES_TOKEN as string,
+  });
 
-//   const header = await client.getEntries({ content_type: "header" });
+  const cocktails = await client.getEntries({
+    content_type: "cocktailRecipe",
+  });
 
-//   return {
-//     props: {
-//       header: header.items,
-//     },
-//   };
-// }
+  return {
+    paths:
+      cocktails.items.map((item) => ({
+        params: { slug: item.fields.slug || "" },
+      })) ?? [],
+    fallback: false, // Can be 'false', 'true', or 'blocking'
+  };
+};
+
+export async function getStaticProps() {
+  const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID as string,
+    accessToken: process.env.CONTENTFUL_ACCES_TOKEN as string,
+  });
+
+  const slug = "Bramble";
+
+  // const cocktails = await client.getEntries({ content_type: "cocktailRecipe" });
+
+  const cocktail = await client.getEntries({
+    content_type: "cocktailRecipe",
+    "fields.slug[match]": slug,
+  });
+
+  // console.log("return header", cocktails.items[0].fields);
+  return {
+    props: {
+      cocktail: cocktail.items[0],
+    },
+  };
+}
 
 export default CocktailPage;
