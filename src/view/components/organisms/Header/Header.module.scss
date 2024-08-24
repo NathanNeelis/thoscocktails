@@ -62,3 +62,25 @@
   width: 1.8rem;
   height: 1.8rem;
 }
+
+// filter wrapper for when fitler is active
+.filterWrapper {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: $highlight;
+  margin-top: 7rem;
+  transform: translateX(calc(100vw + 4rem));
+  transition: transform 0.3s ease-in;
+}
+
+.filterBlockActive {
+  transform: translateX(0);
+}
+
+.filtersUsed {
+  width: 100%;
+  background-color: $highlight;
+}

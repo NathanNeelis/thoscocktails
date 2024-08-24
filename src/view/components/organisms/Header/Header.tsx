@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Logo } from "@src/view/components";
+import classnames from "classnames";
 
 import $ from "./Header.module.scss";
 
@@ -10,6 +11,13 @@ type Props = {
 const Header: React.FC<Props> = ({ onChangeCallback }) => {
   // initiate states
   const [value, setValue] = useState("");
+  const [filterSetActive, setFilterSetActive] = useState(false);
+  const [filtersActive, setFiltersActive] = useState(true);
+
+  const fitlerBlock = classnames([
+    $.filterWrapper,
+    filterSetActive && $.filterBlockActive,
+  ]);
 
   // change input handler. Takes a change event. Uses a callback function to update parent
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,6 +35,12 @@ const Header: React.FC<Props> = ({ onChangeCallback }) => {
     if (e.key === "Enter") {
       e.preventDefault(); // Prevent the default Enter key behavior
     }
+  };
+
+  const activateFilters = () => {
+    console.log("clicked filters");
+    // update state
+    setFilterSetActive(!filterSetActive);
   };
 
   return (
@@ -59,13 +73,31 @@ const Header: React.FC<Props> = ({ onChangeCallback }) => {
       </div>
 
       {/* filters */}
-      <div className={$.filters}>
-        <img
-          src="/icons/filter.svg"
-          alt="filter icon"
-          className={$.filterIcon}
-        />
+      <button className={$.filters} onClick={activateFilters}>
+        {!filterSetActive && (
+          <img
+            src="/icons/filter.svg"
+            alt="filter icon"
+            className={$.filterIcon}
+          />
+        )}
+        {filterSetActive && (
+          <img
+            src="/icons/close.svg"
+            alt="filter icon"
+            className={$.filterIcon}
+          />
+        )}
+      </button>
+      <div className={fitlerBlock}>
+        <p>filter state is now active. ADD FILTERS HERE </p>
       </div>
+
+      {/* {filtersActive && (
+        <div className={$.filtersUsed}>
+          <p>There are filters active</p>
+        </div>
+      )} */}
     </header>
   );
 };

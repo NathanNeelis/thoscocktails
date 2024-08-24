@@ -7,7 +7,6 @@ interface Props {
 }
 
 const Method: React.FC<Props> = ({ method }) => {
-  console.log(method);
   return (
     <div className={$.methodWrapper}>
       <div className={$.methodHeader}>
