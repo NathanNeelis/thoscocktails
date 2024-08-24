@@ -1,22 +1,25 @@
 import React from "react";
 import { Tags } from "@src/view/components";
+import { CocktailCollection } from "@src/types";
 
 import $ from "./Description.module.scss";
 
 interface Props {
-  description: string;
+  cocktail: CocktailCollection;
 }
 
-const Description: React.FC<Props> = ({ description }) => {
+const Description: React.FC<Props> = ({ cocktail }) => {
   return (
     <div className={$.descriptionWrapper}>
       <div className={$.descriptionHeader}>
-        <div className={$.tagsWrapper}>{/* <Tags /> */}</div>
-        <h2>El Diablo</h2>
+        <div className={$.tagsWrapper}>
+          <Tags tagCollection={cocktail.fields.tags} />
+        </div>
+        <h2>{cocktail.fields.name.toUpperCase()}</h2>
       </div>
 
       <div className={$.descriptionContent}>
-        <p>{description}</p>
+        <p>{cocktail.fields.description}</p>
       </div>
     </div>
   );

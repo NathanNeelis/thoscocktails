@@ -13,20 +13,15 @@ type Cocktail = {
   tags: Array<string>;
   description: string;
   method: string;
-  bartender: Bartender;
+  bartender: BartenderType;
 };
 
-type Bartender = {
+export type BartenderType = {
   fields: {
     name: string;
     title: string;
     quote: string;
-    profilePhoto: {
-      name: string;
-      title: string;
-      quote?: string;
-      profilePhoto: ImageDetails;
-    };
+    profilePhoto: ImageDetails;
   };
   sys: Sys;
 };

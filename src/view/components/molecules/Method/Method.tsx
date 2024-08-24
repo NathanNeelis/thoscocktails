@@ -2,7 +2,12 @@ import React from "react";
 
 import $ from "./Method.module.scss";
 
-const Method: React.FC = () => {
+interface Props {
+  method: string;
+}
+
+const Method: React.FC<Props> = ({ method }) => {
+  console.log(method);
   return (
     <div className={$.methodWrapper}>
       <div className={$.methodHeader}>
@@ -11,15 +16,14 @@ const Method: React.FC = () => {
 
       <div className={$.methodContent}>
         <ol>
-          <li>
-            Add the tequila, creme de cassis and lime juice into a shaker with
-            ice and shake until well-chilled.
-          </li>
-          <li>
-            Strain into a Collins glass over fresh ice and top with the ginger
-            beer.
-          </li>
-          <li>Garnish with a lime wedge.</li>
+          {method}
+
+          {/* TODO: Fix method in steps of an ordered list.         */}
+
+          {/* {method &&
+            method.map((step) => {
+              return <li key={step}>{step}</li>;
+            })} */}
         </ol>
       </div>
     </div>

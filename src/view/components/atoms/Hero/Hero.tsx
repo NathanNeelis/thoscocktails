@@ -1,15 +1,17 @@
 import React from "react";
-import { ImageWrapper } from "@src/view/components";
 
 import $ from "./Hero.module.scss";
 
-const Hero: React.FC = () => {
+interface Props {
+  cocktailImage: string;
+  alt: string;
+}
+
+const Hero: React.FC<Props> = (cocktailImage, alt) => {
+  console.log(cocktailImage);
   return (
     <div className={$.hero}>
-      <img
-        src="/images/eldiablo.jpeg"
-        alt="Professional image of the El Diablo cocktail"
-      />
+      <img src={cocktailImage.cocktailImage} alt={alt} />
     </div>
   );
 };

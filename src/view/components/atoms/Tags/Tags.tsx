@@ -13,7 +13,7 @@ const Tags: React.FC<Props> = ({ tagCollection }) => {
         tagCollection.map((tag) => {
           return (
             <div className={$.tag} key={tag}>
-              {tag}
+              {tag.toLocaleLowerCase()}
             </div>
           );
         })}

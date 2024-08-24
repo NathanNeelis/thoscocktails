@@ -17,16 +17,16 @@ const Details: React.FC<Props> = ({ cocktail }) => {
   return (
     <div className={$.details}>
       {/* cocktail description  */}
-      <Description description={cocktail.fields.description} />
+      <Description cocktail={cocktail} />
 
       {/* ingredients  */}
-      <Ingredients />
+      <Ingredients ingredients={cocktail.fields.ingredients} />
 
       {/* method  */}
-      <Method />
+      <Method method={cocktail.fields.method} />
 
       {/* creator  */}
-      <Creator />
+      <Creator bartender={cocktail.fields.bartender} />
     </div>
   );
 };

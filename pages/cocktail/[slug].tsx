@@ -9,6 +9,11 @@ import $ from "./index.module.scss";
 interface Props {
   cocktail: CocktailCollection;
 }
+interface Context {
+  params: {
+    slug: string;
+  };
+}
 
 interface Params extends ParsedUrlQuery {
   slug: string;
@@ -27,7 +32,7 @@ const CocktailPage: React.FC<Props> = ({ cocktail }) => {
       </Head>
 
       {/* header  */}
-      <DetailpageHeader />
+      <DetailpageHeader cocktail={cocktail} />
 
       <main className={$.main}>
         <Details cocktail={cocktail} />
@@ -57,22 +62,20 @@ export const getStaticPaths = async () => {
   };
 };
 
-export async function getStaticProps() {
+export async function getStaticProps<Params>(context: Context) {
   const client = createClient({
     space: process.env.CONTENTFUL_SPACE_ID as string,
     accessToken: process.env.CONTENTFUL_ACCES_TOKEN as string,
   });
 
-  const slug = "Bramble";
-
-  // const cocktails = await client.getEntries({ content_type: "cocktailRecipe" });
+  const params = context.params;
+  const { slug } = params;
 
   const cocktail = await client.getEntries({
     content_type: "cocktailRecipe",
     "fields.slug[match]": slug,
   });
 
-  // console.log("return header", cocktails.items[0].fields);
   return {
     props: {
       cocktail: cocktail.items[0],

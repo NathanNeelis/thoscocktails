@@ -30,7 +30,7 @@ const CocktailCard: React.FC<Props> = ({ cocktailCollection }) => {
               </div>
 
               <div className={$.cocktailTitle}>
-                <h2>{cocktail.fields.name}</h2>
+                <h2>{cocktail.fields.name.toUpperCase()}</h2>
               </div>
 
               {/* tags */}

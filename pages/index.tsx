@@ -66,7 +66,6 @@ export async function getStaticProps() {
   });
 
   const cocktails = await client.getEntries({ content_type: "cocktailRecipe" });
-  // console.log("return header", cocktails.items[0].fields.slug);
 
   return {
     props: {

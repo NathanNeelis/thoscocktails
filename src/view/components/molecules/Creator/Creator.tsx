@@ -1,9 +1,14 @@
 import React from "react";
 import { Bartender } from "@src/view/components";
+import { BartenderType } from "@src/types";
 
 import $ from "./Creator.module.scss";
 
-const Creator: React.FC = () => {
+interface Props {
+  bartender: BartenderType;
+}
+
+const Creator: React.FC<Props> = ({ bartender }) => {
   return (
     <div className={$.creatorWrapper}>
       <div className={$.creatorHeader}>
@@ -11,7 +16,7 @@ const Creator: React.FC = () => {
       </div>
 
       <div className={$.creatorContent}>
-        <Bartender />
+        <Bartender bartender={bartender} />
       </div>
     </div>
   );

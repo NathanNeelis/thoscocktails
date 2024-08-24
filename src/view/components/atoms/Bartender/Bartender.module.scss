@@ -16,7 +16,8 @@
     overflow: hidden;
 
     img {
-      object-fit: cover;
+      object-fit: object-fit;
+      width: 100%;
     }
   }
 
