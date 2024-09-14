@@ -3,6 +3,7 @@ import Head from "next/head";
 import { createClient } from "contentful";
 import { Header, Logo, CocktailCard } from "@src/view/components";
 import { CocktailCollection } from "@src/types";
+import { getUniqueValues, filterCocktailsByIngredients } from "@src/view/utils";
 
 import $ from "./index.module.scss";
 
@@ -20,7 +21,7 @@ const Home: React.FC<Props> = ({ cocktailCollection }) => {
   const [searchCocktailCollection, setSearchCocktailCollection] =
     useState(cocktailCollection);
 
-  // TODO optional. Add a loading state if searching becomes slow.
+  const uniqueIngredients: string[] = getUniqueValues(cocktailCollection);
 
   // Searchbar input change handler.
   // Takes a searchterm string and updates the cocktail collection
@@ -28,7 +29,18 @@ const Home: React.FC<Props> = ({ cocktailCollection }) => {
     const filteredItems = cocktailCollection.filter((cocktail) =>
       cocktail.fields.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
+    // Todo. Combine with filter functionality. Challange; both use e.target.value.
+    setSearchCocktailCollection(filteredItems);
+  };
 
+  // callback function to handle input filters
+  // takes the available ingredients and updates the collection
+  const handleFilterInputChange = (availableIngredients: string[]): void => {
+    const filteredItems = filterCocktailsByIngredients(
+      cocktailCollection,
+      availableIngredients
+    );
+    // console.log("availalbe", availableIngredients);
     setSearchCocktailCollection(filteredItems);
   };
 
@@ -43,9 +55,26 @@ const Home: React.FC<Props> = ({ cocktailCollection }) => {
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
 
-      <Header onChangeCallback={handleSearchInputChange} />
+      <Header
+        onChangeCallback={handleSearchInputChange}
+        ingredients={uniqueIngredients}
+        onFilterChangeCallback={handleFilterInputChange}
+      />
 
       <main>
+        {/* FiltersNotification component 
+              how does it knwo to be active?
+        
+        */}
+
+        {/* filters compontent 
+        
+            how does it now to be active
+            send back all filtered ingredients with a call back
+            send back all filtered tags with a call back
+        
+        */}
+
         {searchCocktailCollection.length === 0 ? (
           // TODO: update the empty state
           <p>No cocktails found</p> // should be component

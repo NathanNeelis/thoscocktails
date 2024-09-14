@@ -1,18 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Logo } from "@src/view/components";
 import classnames from "classnames";
+import {
+  checkAllCheckboxes,
+  areAllCheckboxesChecked,
+  getCheckedCheckboxValues,
+} from "@src/view/utils";
 
 import $ from "./Header.module.scss";
 
 type Props = {
   onChangeCallback?: (value: string) => void;
+  onFilterChangeCallback?: (value: string[]) => void;
+  ingredients: Array<string>;
 };
 
-const Header: React.FC<Props> = ({ onChangeCallback }) => {
+const Header: React.FC<Props> = ({
+  onChangeCallback,
+  ingredients,
+  onFilterChangeCallback,
+}) => {
   // initiate states
   const [value, setValue] = useState("");
   const [filterSetActive, setFilterSetActive] = useState(false);
-  const [filtersActive, setFiltersActive] = useState(true);
+  const [filtersActive, setFiltersActive] = useState(false);
+  const [filterValues, setFilterValues] = useState<string[]>([]);
 
   const fitlerBlock = classnames([
     $.filterWrapper,
@@ -31,73 +43,119 @@ const Header: React.FC<Props> = ({ onChangeCallback }) => {
     }
   };
 
+  // Ingredients filter
+  const handleFilterChange = () => {
+    let currentFilters: string[] = filterValues;
+    currentFilters = getCheckedCheckboxValues("ingredientsFilter");
+
+    if (!areAllCheckboxesChecked("ingredientsFilter")) {
+      setFiltersActive(true);
+    }
+
+    if (onFilterChangeCallback) {
+      onFilterChangeCallback(currentFilters); // Invoke the callback with the new input value
+    }
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault(); // Prevent the default Enter key behavior
     }
   };
 
-  const activateFilters = () => {
-    console.log("clicked filters");
-    // update state
+  const activateSetFilters = () => {
     setFilterSetActive(!filterSetActive);
   };
 
+  const DeactivateFilters = () => {
+    setFiltersActive(false);
+    checkAllCheckboxes("ingredientsFilter");
+    handleFilterChange();
+  };
+
   return (
-    <header className={$.headerWrapper}>
-      {/* logo */}
-      <div className={$.logo}>
-        <Logo />
-      </div>
-
-      {/* searchbar  */}
-      <div className={$.searchBar}>
-        <form>
-          <fieldset>
-            <label htmlFor="">Zoek je cocktail</label>
-            <input
-              type="text"
-              value={value}
-              name="searchbar"
-              id="searchbar"
-              className={$.input}
-              placeholder="Zoek je cocktail"
-              onChange={handleChange}
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
-              onKeyDown={handleKeyDown}
-            />
-          </fieldset>
-        </form>
-      </div>
-
-      {/* filters */}
-      <button className={$.filters} onClick={activateFilters}>
-        {!filterSetActive && (
-          <img
-            src="/icons/filter.svg"
-            alt="filter icon"
-            className={$.filterIcon}
-          />
-        )}
-        {filterSetActive && (
-          <img
-            src="/icons/close.svg"
-            alt="filter icon"
-            className={$.filterIcon}
-          />
-        )}
-      </button>
-      <div className={fitlerBlock}>
-        <p>filter state is now active. ADD FILTERS HERE </p>
-      </div>
-
-      {/* {filtersActive && (
-        <div className={$.filtersUsed}>
-          <p>There are filters active</p>
+    <header className={$.header}>
+      <div className={$.headerWrapper}>
+        {/* logo */}
+        <div className={$.logo}>
+          <Logo />
         </div>
-      )} */}
+
+        {/* searchbar  */}
+        <div className={$.searchBar}>
+          <form>
+            <fieldset>
+              <label htmlFor="">Zoek je cocktail</label>
+              <input
+                type="text"
+                value={value}
+                name="searchbar"
+                id="searchbar"
+                className={$.input}
+                placeholder="Zoek je cocktail"
+                onChange={handleChange}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                }}
+                onKeyDown={handleKeyDown}
+              />
+            </fieldset>
+          </form>
+        </div>
+
+        {/* filters */}
+        <button className={$.filters} onClick={activateSetFilters}>
+          {!filterSetActive && (
+            <img
+              src="/icons/filter.svg"
+              alt="filter icon"
+              className={$.filterIcon}
+            />
+          )}
+          {filterSetActive && (
+            <img
+              src="/icons/close.svg"
+              alt="filter icon"
+              className={$.filterIcon}
+            />
+          )}
+        </button>
+
+        {/* FILTERBLOCK should be compontent  */}
+        <div className={fitlerBlock}>
+          <h3>Your available ingredients</h3>
+          <form id="ingredientsFilter">
+            <fieldset>
+              {ingredients &&
+                ingredients.map((ingredient) => {
+                  return (
+                    <label key={ingredient}>
+                      <input
+                        type="checkbox"
+                        value={ingredient}
+                        onChange={handleFilterChange}
+                      />
+                      {ingredient}
+                    </label>
+                  );
+                })}
+            </fieldset>
+          </form>
+        </div>
+      </div>
+
+      {/* FILTERSNOTIFICATION should be component  */}
+      {filtersActive && (
+        <div className={$.filtersActive}>
+          <div className={$.filterNotificationWrapper}>
+            <button onClick={activateSetFilters} className={$.regular}>
+              There are filters active
+            </button>
+            <button onClick={DeactivateFilters}>Disable</button>
+          </div>
+        </div>
+      )}
+      {!filtersActive && <div className={$.filtersInactive}></div>}
     </header>
   );
 };

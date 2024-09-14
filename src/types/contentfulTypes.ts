@@ -9,6 +9,7 @@ type Cocktail = {
   name: string;
   slug: string;
   image: ImageDetails;
+  filterIngredients: Array<string>;
   ingredients: Array<string>;
   tags: Array<string>;
   description: string;

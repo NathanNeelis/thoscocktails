@@ -1,5 +1,9 @@
 @import "../../../../../styles/variables";
 
+.header {
+  position: relative;
+}
+
 .headerWrapper {
   width: 100vw;
   display: flex;
@@ -74,13 +78,72 @@
   margin-top: 7rem;
   transform: translateX(calc(100vw + 4rem));
   transition: transform 0.3s ease-in;
+
+  h3 {
+    padding: 0 1rem;
+  }
+
+  fieldset {
+    border: none;
+    padding: 0 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  label {
+    height: 1.5rem;
+    width: 45%;
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+  }
+  input[type="checkbox"] {
+    height: 1rem;
+    width: 1rem;
+    border: 0px;
+    background-color: $white;
+    margin-right: 0.5rem;
+  }
 }
 
 .filterBlockActive {
   transform: translateX(0);
 }
 
-.filtersUsed {
-  width: 100%;
+// filter active notification
+.filtersActive {
+  position: relative;
+  margin-top: 7rem;
+  width: 100vw;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+
+  color: white;
   background-color: $highlight;
+
+  .regular {
+    font-weight: 500;
+  }
+
+  button {
+    height: 100%;
+    padding: 0.6rem 1rem;
+    font-weight: 800;
+
+    cursor: pointer;
+  }
+}
+.filtersInactive {
+  position: relative;
+  margin-top: 7rem;
+}
+
+.filterNotificationWrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  // padding: 1rem;
 }
