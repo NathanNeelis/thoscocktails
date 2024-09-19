@@ -62,19 +62,6 @@ const Home: React.FC<Props> = ({ cocktailCollection }) => {
       />
 
       <main>
-        {/* FiltersNotification component 
-              how does it knwo to be active?
-        
-        */}
-
-        {/* filters compontent 
-        
-            how does it now to be active
-            send back all filtered ingredients with a call back
-            send back all filtered tags with a call back
-        
-        */}
-
         {searchCocktailCollection.length === 0 ? (
           // TODO: update the empty state
           <p>No cocktails found</p> // should be component

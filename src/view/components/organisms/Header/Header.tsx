@@ -129,14 +129,21 @@ const Header: React.FC<Props> = ({
               {ingredients &&
                 ingredients.map((ingredient) => {
                   return (
-                    <label key={ingredient}>
+                    <div className={$.checkboxWrapper} key={ingredient}>
                       <input
                         type="checkbox"
+                        id={ingredient}
                         value={ingredient}
+                        className={$.customCheckbox}
                         onChange={handleFilterChange}
                       />
-                      {ingredient}
-                    </label>
+                      <label
+                        className={$.customCheckboxLabel}
+                        htmlFor={ingredient}
+                      >
+                        {ingredient} <span></span>
+                      </label>
+                    </div>
                   );
                 })}
             </fieldset>

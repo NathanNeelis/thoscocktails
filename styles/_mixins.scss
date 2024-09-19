@@ -20,3 +20,19 @@
         + 'Please make sure it is defined in `$breakpoints` map.';
   }
 }
+
+@mixin ba($cnt, $pos, $mrg, $tp, $rt, $bt, $lt, $w, $h, $bg, $br, $ts, $tr) {
+  content: $cnt;
+  position: $pos;
+  margin: $mrg;
+  top: $tp;
+  right: $rt;
+  bottom: $bt;
+  left: $lt;
+  width: $w;
+  height: $h;
+  background: $bg;
+  border-radius: $br;
+  transform: $ts;
+  transition: $tr;
+}

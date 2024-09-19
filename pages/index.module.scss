@@ -1,6 +1,11 @@
 @import "../styles/variables";
 
-.main {
+.container {
   width: $max-page-width;
   margin: 0 auto;
+
+  @include respond-to("medium") {
+    width: 30rem;
+    margin: 0 auto;
+  }
 }

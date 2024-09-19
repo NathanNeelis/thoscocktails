@@ -16,6 +16,11 @@
   position: fixed;
   top: 0;
   z-index: 10;
+
+  @include respond-to("medium") {
+    width: 30rem;
+    margin: 0 auto;
+  }
 }
 
 .logo {
@@ -74,10 +79,15 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: $highlight;
+  background-color: $primary;
   margin-top: 7rem;
-  transform: translateX(calc(100vw + 4rem));
+  transform: translateY(calc(100vh + 4rem));
   transition: transform 0.3s ease-in;
+
+  @include respond-to("medium") {
+    width: 30rem;
+    margin: 7rem auto 7rem 0;
+  }
 
   h3 {
     padding: 0 1rem;
@@ -91,25 +101,61 @@
     justify-content: space-between;
     gap: 1rem;
   }
-  label {
-    height: 1.5rem;
+  .checkboxWrapper {
     width: 45%;
     display: flex;
-    align-items: center;
-    text-transform: capitalize;
-  }
-  input[type="checkbox"] {
-    height: 1rem;
-    width: 1rem;
-    border: 0px;
-    background-color: $white;
-    margin-right: 0.5rem;
+
+    label {
+      height: 1.5rem;
+      display: flex;
+      align-items: center;
+      text-transform: capitalize;
+      position: relative;
+      margin-left: 1rem;
+      font-size: 0.96rem;
+
+      &::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        background-color: $primary;
+        position: absolute;
+        bottom: 4px;
+        left: -35px;
+        border-radius: 50%;
+        box-shadow: 0px 0px 0px 2px #fff;
+        z-index: 10;
+      }
+    }
+    input[type="checkbox"] {
+      height: 1rem;
+      width: 1rem;
+      border: 0px;
+      background-color: $white;
+      margin-right: 0.5rem;
+      visibility: hidden;
+    }
+
+    input[type="checkbox"]:checked + label::before {
+      content: "";
+      width: 20px;
+      height: 20px;
+      background-color: $highlight;
+      position: absolute;
+      bottom: 4px;
+      left: -35px;
+      border-radius: 50%;
+      box-shadow: 0px 0px 0px 2px #fff;
+      z-index: 99;
+    }
   }
 }
 
 .filterBlockActive {
-  transform: translateX(0);
+  transform: translateY(0);
 }
+
+// checkbox
 
 // filter active notification
 .filtersActive {
@@ -123,6 +169,10 @@
 
   color: white;
   background-color: $highlight;
+
+  @include respond-to("medium") {
+    width: 30rem;
+  }
 
   .regular {
     font-weight: 500;
@@ -145,5 +195,4 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  // padding: 1rem;
 }

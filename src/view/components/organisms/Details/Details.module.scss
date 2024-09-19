@@ -2,4 +2,9 @@
 
 .details {
   width: 100vw;
+
+  @include respond-to("medium") {
+    max-width: 30rem;
+    margin: 0 auto;
+  }
 }

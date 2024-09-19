@@ -1,7 +1,14 @@
+@import "../../../../../styles/variables";
+
 .hero {
   img {
     height: 100%;
     width: 100vw;
     object-fit: cover;
+
+    @include respond-to("medium") {
+      max-width: 30rem;
+      margin: 0 auto;
+    }
   }
 }
