@@ -52,9 +52,9 @@ const Home: React.FC<Props> = ({ cocktailCollection }) => {
           name="description"
           content="Het cocktail menu van Tho's Cocktails"
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="www.dev.nathanneelis.nl/favicon.ico" />
         {/* <!-- MANIFEST  --> */}
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href="www.dev.nathanneelis.nl/manifest.json" />
       </Head>
 
       <Header
