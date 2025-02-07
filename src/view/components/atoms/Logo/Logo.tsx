@@ -1,11 +1,12 @@
 import React from "react";
 import { ImageWrapper } from "@src/view/components";
+import Link from "next/link";
 
 import $ from "./Logo.module.scss";
 
 const Logo: React.FC = () => {
   return (
-    <a href="/">
+    <Link href="/">
       <ImageWrapper
         className={$.logoImage}
         alt="Logo Tho's Cocktails"
@@ -14,7 +15,7 @@ const Logo: React.FC = () => {
         height={65}
         priority
       />
-    </a>
+    </Link>
   );
 };
 

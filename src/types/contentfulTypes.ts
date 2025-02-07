@@ -1,8 +1,6 @@
-import { Sys } from "contentful";
-
 export interface CocktailCollection {
   fields: Cocktail;
-  sys: Sys;
+  sys: any;
 }
 
 type Cocktail = {
@@ -24,7 +22,7 @@ export type BartenderType = {
     quote: string;
     profilePhoto: ImageDetails;
   };
-  sys: Sys;
+  sys: any;
 };
 
 type ImageDetails = {
