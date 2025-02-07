@@ -28,7 +28,7 @@ const CocktailPage: React.FC<Props> = ({ cocktail }) => {
           name="description"
           content="Het cocktail menu van Tho's Cocktails"
         />
-        {/* <link rel="icon" href="/favicon.ico" /> */}
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       {/* header  */}
