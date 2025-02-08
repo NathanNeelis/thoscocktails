@@ -46,6 +46,7 @@ export function getCheckedCheckboxValues(formId: string): string[] {
       .filter((checkbox) => (checkbox as HTMLInputElement).checked)
       .map((checkbox) => (checkbox as HTMLInputElement).value);
 
+    console.log("checkboxes", checkedValues);
     return checkedValues;
   } else {
     console.error(`Form with ID "${formId}" not found.`);
