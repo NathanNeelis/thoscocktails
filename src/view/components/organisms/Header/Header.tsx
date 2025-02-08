@@ -92,11 +92,14 @@ const Header: React.FC<Props> = ({
   };
 
   const handleTouchEnd = () => {
-    const swipeDistance = touchEndY.current - touchStartY.current;
+    let swipeDistance = touchEndY.current - touchStartY.current;
     console.log(swipeDistance);
 
     if (swipeDistance > 120) {
       setFilterSetActive(!filterSetActive);
+      swipeDistance = 0;
+      touchEndY.current = 0;
+      touchStartY.current = 0;
     }
   };
 
