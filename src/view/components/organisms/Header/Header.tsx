@@ -78,6 +78,27 @@ const Header: React.FC<Props> = ({
     handleFilterChange();
   };
 
+  // Filter touch
+  // When swiped down in filter, close filter
+  const touchStartY = useRef(0);
+  const touchEndY = useRef(0);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = () => {
+    const swipeDistance = touchEndY.current - touchStartY.current;
+
+    if (swipeDistance > 50) {
+      setFilterSetActive(!filterSetActive);
+    }
+  };
+
   return (
     <header className={$.header}>
       <div className={$.headerWrapper}>
@@ -127,7 +148,12 @@ const Header: React.FC<Props> = ({
         </button>
 
         {/* FILTERBLOCK should be compontent  */}
-        <div className={fitlerBlock}>
+        <div
+          className={fitlerBlock}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           <h3>Your available ingredients</h3>
           <form id="ingredientsFilter">
             <fieldset>
