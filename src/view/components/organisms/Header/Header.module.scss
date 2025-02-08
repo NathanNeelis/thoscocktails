@@ -77,10 +77,10 @@
   width: 100vw;
   height: 100vh;
   position: absolute;
-  top: -1rem;
+  top: 0;
   left: 0;
   background-color: $primary;
-  margin-top: 7rem;
+  margin-top: 6rem;
   transform: translateY(calc(100vh + 4rem));
   transition: transform 0.3s ease-in;
 
