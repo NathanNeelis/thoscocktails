@@ -18,30 +18,42 @@ interface Props {
 
 const Home: React.FC<Props> = ({ cocktailCollection }) => {
   // initiate states
-  const [searchCocktailCollection, setSearchCocktailCollection] =
+  const [filteredCocktailCollection, setFilteredCocktailCollection] =
     useState(cocktailCollection);
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
 
   const uniqueIngredients: string[] = getUniqueValues(cocktailCollection);
 
-  // Searchbar input change handler.
-  // Takes a searchterm string and updates the cocktail collection
-  const handleSearchInputChange = (searchTerm: string): void => {
-    const filteredItems = cocktailCollection.filter((cocktail) =>
-      cocktail.fields.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    // Todo. Combine with filter functionality. Challange; both use e.target.value.
-    setSearchCocktailCollection(filteredItems);
+  const updateFilteredCollection = (search: string, ingredients: string[]) => {
+    let filtered = cocktailCollection;
+
+    // Filter by ingredients
+    if (ingredients.length > 0) {
+      filtered = filterCocktailsByIngredients(filtered, ingredients);
+    }
+
+    // Filter by search term
+    if (search) {
+      filtered = filtered.filter((cocktail) =>
+        cocktail.fields.name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    setFilteredCocktailCollection(filtered);
   };
 
-  // callback function to handle input filters
-  // takes the available ingredients and updates the collection
-  const handleFilterInputChange = (availableIngredients: string[]): void => {
-    const filteredItems = filterCocktailsByIngredients(
-      cocktailCollection,
-      availableIngredients
-    );
-    // console.log("availalbe", availableIngredients);
-    setSearchCocktailCollection(filteredItems);
+  // Searchbar input change handler
+  const handleSearchInputChange = (search: string): void => {
+    setSearchTerm(search);
+    updateFilteredCollection(search, selectedIngredients);
+  };
+
+  // Callback function to handle input filters
+  const handleFilterInputChange = (ingredients: string[]): void => {
+    setSelectedIngredients(ingredients);
+    updateFilteredCollection(searchTerm, ingredients);
   };
 
   return (
@@ -64,11 +76,11 @@ const Home: React.FC<Props> = ({ cocktailCollection }) => {
       />
 
       <main>
-        {searchCocktailCollection.length === 0 ? (
+        {filteredCocktailCollection.length === 0 ? (
           // TODO: update the empty state
           <p>No cocktails found</p> // should be component
         ) : (
-          <CocktailCard cocktailCollection={searchCocktailCollection} />
+          <CocktailCard cocktailCollection={filteredCocktailCollection} />
         )}
       </main>
 

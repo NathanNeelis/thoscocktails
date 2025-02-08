@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Logo } from "@src/view/components";
 import classnames from "classnames";
 import {
@@ -30,6 +30,11 @@ const Header: React.FC<Props> = ({
     $.filterWrapper,
     filterSetActive && $.filterBlockActive,
   ]);
+
+  useEffect(() => {
+    // initial state. All ingredients are available.
+    checkAllCheckboxes("ingredientsFilter");
+  }, []);
 
   // change input handler. Takes a change event. Uses a callback function to update parent
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
