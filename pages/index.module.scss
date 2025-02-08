@@ -2,7 +2,7 @@
 
 .container {
   width: $max-page-width;
-  margin: 0 auto;
+  margin: 9rem auto;
 
   @include respond-to("medium") {
     width: 30rem;
