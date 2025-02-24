@@ -22,6 +22,8 @@ const Details: React.FC<Props> = ({ cocktail }) => {
       {/* ingredients  */}
       <Ingredients ingredients={cocktail.fields.ingredients} />
 
+      {/* cocktail glass */}
+
       {/* method  */}
       <Method method={cocktail.fields.method} />
 

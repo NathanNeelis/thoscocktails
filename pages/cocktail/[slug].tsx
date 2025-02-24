@@ -20,6 +20,7 @@ interface Params extends ParsedUrlQuery {
 }
 
 const CocktailPage: React.FC<Props> = ({ cocktail }) => {
+  console.log("cocktail", cocktail);
   return (
     <div className={$.container}>
       <Head>
