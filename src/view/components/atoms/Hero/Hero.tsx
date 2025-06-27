@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Hero: React.FC<Props> = (cocktailImage, alt) => {
-  console.log(cocktailImage);
+  // console.log(cocktailImage);
   return (
     <div className={$.hero}>
       <img src={cocktailImage.cocktailImage} alt={alt} />

@@ -94,7 +94,7 @@ const Header: React.FC<Props> = ({
   const handleTouchEnd = () => {
     let swipeDistance = touchEndY.current - touchStartY.current;
 
-    if (swipeDistance > 120) {
+    if (swipeDistance > 320) {
       setFilterSetActive(!filterSetActive);
       swipeDistance = 0;
       touchEndY.current = 0;
@@ -151,7 +151,7 @@ const Header: React.FC<Props> = ({
         </button>
 
         {/* FILTERBLOCK should be compontent  */}
-        <div
+        <section
           className={fitlerBlock}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
@@ -182,7 +182,7 @@ const Header: React.FC<Props> = ({
                 })}
             </fieldset>
           </form>
-        </div>
+        </section>
       </div>
 
       {/* FILTERSNOTIFICATION should be component  */}
