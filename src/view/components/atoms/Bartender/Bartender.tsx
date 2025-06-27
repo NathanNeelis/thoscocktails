@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Bartender: React.FC<Props> = ({ bartender }) => {
-  console.log(bartender);
+  // console.log(bartender);
   return (
     <div className={$.bartenderWrapper}>
       <div className={$.bartenderProfileImage}>

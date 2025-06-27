@@ -12,10 +12,10 @@ const Description: React.FC<Props> = ({ cocktail }) => {
   return (
     <div className={$.descriptionWrapper}>
       <div className={$.descriptionHeader}>
+        <h2>{cocktail.fields.name.toUpperCase()}</h2>
         <div className={$.tagsWrapper}>
           <Tags tagCollection={cocktail.fields.tags} />
         </div>
-        <h2>{cocktail.fields.name.toUpperCase()}</h2>
       </div>
 
       <div className={$.descriptionContent}>
