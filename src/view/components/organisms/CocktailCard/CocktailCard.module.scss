@@ -42,4 +42,11 @@
   display: flex;
   align-items: center;
   background-color: $primary;
+
+  h2 {
+    width: 99%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 }
