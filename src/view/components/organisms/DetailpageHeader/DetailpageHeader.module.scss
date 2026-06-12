@@ -13,3 +13,18 @@
     filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.45));
   }
 }
+
+.thoRaySummer {
+  position: absolute;
+  top: 2rem;
+  right: 0;
+  // width: 45vw;
+  background-color: $primary;
+  color: $white;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 8px 0 0 8px;
+  font-family: $font-familiy-trs;
+
+  color: yellow;
+}

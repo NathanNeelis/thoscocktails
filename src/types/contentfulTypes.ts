@@ -13,6 +13,7 @@ type Cocktail = {
   description: string;
   method: string;
   bartender: BartenderType;
+  thoRaySummer: boolean;
 };
 
 export type BartenderType = {

@@ -9,6 +9,8 @@ interface Props {
 }
 
 const DetailpageHeader: React.FC<Props> = ({ cocktail }) => {
+  const thoRaySummer = cocktail.fields.thoRaySummer;
+
   return (
     <header className={$.header}>
       <div className={$.logo}>
@@ -18,6 +20,11 @@ const DetailpageHeader: React.FC<Props> = ({ cocktail }) => {
         cocktailImage={cocktail.fields.image.fields.file.url}
         alt={cocktail.fields.image.fields.description}
       />
+      {thoRaySummer && (
+        <div className={$.thoRaySummer}>
+          Tho Ray <span>Summer</span> ☀️{" "}
+        </div>
+      )}
     </header>
   );
 };

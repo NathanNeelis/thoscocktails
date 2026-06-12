@@ -1,6 +1,7 @@
 import React from "react";
 import { Tags } from "@src/view/components";
 import { CocktailCollection } from "@src/types";
+import classNames from "classnames";
 
 import $ from "./CocktailCard.module.scss";
 
@@ -14,6 +15,7 @@ const CocktailCard: React.FC<Props> = ({ cocktailCollection }) => {
       {cocktailCollection &&
         cocktailCollection.map((cocktail) => {
           const targetURL = `/cocktail/${cocktail.fields.slug}`;
+          const thoRaySummer = cocktail.fields.thoRaySummer;
 
           return (
             <a
@@ -29,7 +31,17 @@ const CocktailCard: React.FC<Props> = ({ cocktailCollection }) => {
                 />
               </div>
 
-              <div className={$.cocktailTitle}>
+              {thoRaySummer && (
+                <div className={$.trsBtn}>
+                  <p>Available during ThoRay Summer 2026!</p>
+                </div>
+              )}
+
+              <div
+                className={classNames(
+                  thoRaySummer ? $.cocktailTitle : $.cocktailTitle,
+                )}
+              >
                 <h2>{cocktail.fields.name.toUpperCase()}</h2>
               </div>
 

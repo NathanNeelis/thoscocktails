@@ -9,9 +9,17 @@ interface Props {
 }
 
 const Description: React.FC<Props> = ({ cocktail }) => {
+  const thoRaySummer = cocktail.fields.thoRaySummer;
+
   return (
     <div className={$.descriptionWrapper}>
       <div className={$.descriptionHeader}>
+        {thoRaySummer && (
+          <div className={$.thoRaySummer}>
+            <p className={$.trs}>Available during </p>
+            <p>ThoRay Summer 2026</p>
+          </div>
+        )}
         <h2>{cocktail.fields.name.toUpperCase()}</h2>
         <div className={$.tagsWrapper}>
           <Tags tagCollection={cocktail.fields.tags} />

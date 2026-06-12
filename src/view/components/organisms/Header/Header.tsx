@@ -13,18 +13,21 @@ type Props = {
   onChangeCallback?: (value: string) => void;
   onFilterChangeCallback?: (value: string[]) => void;
   ingredients: Array<string>;
+  onThoRaySummerChange?: (checked: boolean) => void;
 };
 
 const Header: React.FC<Props> = ({
   onChangeCallback,
   ingredients,
   onFilterChangeCallback,
+  onThoRaySummerChange,
 }) => {
   // initiate states
   const [value, setValue] = useState("");
   const [filterSetActive, setFilterSetActive] = useState(false);
   const [filtersActive, setFiltersActive] = useState(false);
   const [filterValues, setFilterValues] = useState<string[]>([]);
+  const [trsChecked, setTrsChecked] = useState(true);
 
   const fitlerBlock = classnames([
     $.filterWrapper,
@@ -34,6 +37,7 @@ const Header: React.FC<Props> = ({
   useEffect(() => {
     // initial state. All ingredients are available.
     checkAllCheckboxes("ingredientsFilter");
+    setTrsChecked(false);
   }, []);
 
   // change input handler. Takes a change event. Uses a callback function to update parent
@@ -45,6 +49,15 @@ const Header: React.FC<Props> = ({
     // and pass the input value as an argument
     if (onChangeCallback) {
       onChangeCallback(inputValue); // Invoke the callback with the new input value
+    }
+  };
+
+  // Tho Ray SUmmer filter
+  const handleTrsFilterChange = (checked: boolean) => {
+    setTrsChecked(checked);
+
+    if (onThoRaySummerChange) {
+      onThoRaySummerChange(checked);
     }
   };
 
@@ -157,31 +170,61 @@ const Header: React.FC<Props> = ({
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          <h3>Your available ingredients</h3>
-          <form id="ingredientsFilter">
-            <fieldset>
-              {ingredients &&
-                ingredients.map((ingredient) => {
-                  return (
-                    <div className={$.checkboxWrapper} key={ingredient}>
-                      <input
-                        type="checkbox"
-                        id={ingredient}
-                        value={ingredient}
-                        className={$.customCheckbox}
-                        onChange={handleFilterChange}
-                      />
-                      <label
-                        className={$.customCheckboxLabel}
-                        htmlFor={ingredient}
-                      >
-                        {ingredient} <span></span>
-                      </label>
-                    </div>
-                  );
-                })}
-            </fieldset>
-          </form>
+          {/* TRS FILTER  */}
+          <div className={$.trsFilter}>
+            <h3>Available during ThoRay Summer</h3>
+            <form id="trsFilter">
+              <fieldset>
+                <div className={$.checkboxWrapper}>
+                  <input
+                    type="checkbox"
+                    id="thoraysummerfilter"
+                    checked={trsChecked}
+                    className={$.customCheckbox}
+                    onChange={(e) => {
+                      handleTrsFilterChange(e.target.checked);
+                    }}
+                  />
+
+                  <label
+                    className={$.customCheckboxLabel}
+                    htmlFor="thoraysummerfilter"
+                  >
+                    ThoRaySummer<span></span>
+                  </label>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+
+          {/* INGREDIENTS FILTER  */}
+          <div className={$.ingrFilter}>
+            <h3>Your available ingredients</h3>
+            <form id="ingredientsFilter">
+              <fieldset>
+                {ingredients &&
+                  ingredients.map((ingredient) => {
+                    return (
+                      <div className={$.checkboxWrapper} key={ingredient}>
+                        <input
+                          type="checkbox"
+                          id={ingredient}
+                          value={ingredient}
+                          className={$.customCheckbox}
+                          onChange={handleFilterChange}
+                        />
+                        <label
+                          className={$.customCheckboxLabel}
+                          htmlFor={ingredient}
+                        >
+                          {ingredient} <span></span>
+                        </label>
+                      </div>
+                    );
+                  })}
+              </fieldset>
+            </form>
+          </div>
         </section>
       </div>
 
