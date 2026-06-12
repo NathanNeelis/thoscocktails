@@ -22,11 +22,33 @@ const Home: React.FC<Props> = ({ cocktailCollection }) => {
     useState(cocktailCollection);
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
-
   const uniqueIngredients: string[] = getUniqueValues(cocktailCollection);
+  const [selectedIngredients, setSelectedIngredients] = useState<string[]>(
+    () => {
+      if (typeof window !== "undefined") {
+        return JSON.parse(localStorage.getItem("ingredients") || "[]");
+      }
+      return [];
+    },
+  );
+  const [thoRaySummerOnly, setThoRaySummerOnly] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      return JSON.parse(localStorage.getItem("thoRaySummer") || "false");
+    }
+    return false;
+  });
 
-  const updateFilteredCollection = (search: string, ingredients: string[]) => {
+  // ThoRaySUmmer callback function
+  const handleThoRaySummerChange = (checked: boolean) => {
+    setThoRaySummerOnly(checked);
+    updateFilteredCollection(searchTerm, selectedIngredients, checked);
+  };
+
+  const updateFilteredCollection = (
+    search: string,
+    ingredients: string[],
+    thoRaySummer: Boolean,
+  ) => {
     let filtered = cocktailCollection;
 
     // Filter by ingredients
@@ -37,7 +59,13 @@ const Home: React.FC<Props> = ({ cocktailCollection }) => {
     // Filter by search term
     if (search) {
       filtered = filtered.filter((cocktail) =>
-        cocktail.fields.name.toLowerCase().includes(search.toLowerCase())
+        cocktail.fields.name.toLowerCase().includes(search.toLowerCase()),
+      );
+    }
+
+    if (thoRaySummer) {
+      filtered = filtered.filter(
+        (cocktail) => cocktail.fields.thoRaySummer === true,
       );
     }
 
@@ -47,14 +75,22 @@ const Home: React.FC<Props> = ({ cocktailCollection }) => {
   // Searchbar input change handler
   const handleSearchInputChange = (search: string): void => {
     setSearchTerm(search);
-    updateFilteredCollection(search, selectedIngredients);
+    updateFilteredCollection(search, selectedIngredients, thoRaySummerOnly);
   };
 
   // Callback function to handle input filters
   const handleFilterInputChange = (ingredients: string[]): void => {
     setSelectedIngredients(ingredients);
-    updateFilteredCollection(searchTerm, ingredients);
+    updateFilteredCollection(searchTerm, ingredients, thoRaySummerOnly);
   };
+
+  useEffect(() => {
+    localStorage.setItem("ingredients", JSON.stringify(selectedIngredients));
+  }, [selectedIngredients]);
+
+  useEffect(() => {
+    localStorage.setItem("thoRaySummer", JSON.stringify(thoRaySummerOnly));
+  }, [thoRaySummerOnly]);
 
   return (
     <div className={$.container}>
@@ -73,6 +109,7 @@ const Home: React.FC<Props> = ({ cocktailCollection }) => {
         onChangeCallback={handleSearchInputChange}
         ingredients={uniqueIngredients}
         onFilterChangeCallback={handleFilterInputChange}
+        onThoRaySummerChange={handleThoRaySummerChange}
       />
 
       <main>
